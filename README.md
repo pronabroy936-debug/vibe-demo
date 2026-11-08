@@ -29,7 +29,9 @@ To update the live demo, upload the changed files again (same steps 1–2 on the
 
 ```
 App opens on ► Choose an option: Customer | LCO | Guest ──► Continue
-   ├─ LCO ──────────► Partner/LCO login (LCO code + mobile) ─► Success ─► Home
+   ├─ LCO ──────────► Partner / LCO Login
+   │                    ├─ Registered number ─► Login with mobile only ─► Home
+   │                    └─ New number ───────► LCO code field appears ─► Register (LCO code + mobile, once) ─► Home
    ├─ Guest ────────► Join as Guest (mobile only: Register first time, Login after) ─► Home
    │                    (playing a channel asks the guest to subscribe or preview)
    └─ Customer ─────► Log in / Register: Broadband | Cable TV ──► Login
@@ -44,17 +46,18 @@ App opens on ► Choose an option: Customer | LCO | Guest ──► Continue
 
 You can go back from any screen before login to change your selection. After login, Home replaces the login screens, so Back does not return to the form.
 
-### Cable TV, Broadband & Guest: register once, then log in with mobile
+### Cable TV, Broadband, LCO & Guest: register once, then log in with mobile
 
 | User type | First-time registration | After that |
 |---|---|---|
 | Cable TV | **VSC number** + mobile | Mobile only |
 | Broadband | **User ID** + mobile | Mobile only |
+| LCO partner | **LCO code** + mobile | Mobile only |
 | Guest | Mobile only | Mobile only |
 
-- Guests never need a VSC number or User ID. The button reads **Register** for a new number and **Login** for one that's already registered.
-- The Cable TV and Broadband screens ask only for the **mobile number** at first.
-- If the number hasn't been registered for that service, the VSC number or User ID field opens, and the user registers once.
+- Guests never need a VSC number, User ID or LCO code. The button reads **Register** for a new number and **Login** for one that's already registered.
+- The Cable TV, Broadband and LCO screens ask only for the **mobile number** at first.
+- If the number hasn't been registered for that service, the VSC number, User ID or LCO code field opens, and the user registers once.
 - From then on, that number logs in with **mobile only**. The hint says, for example, "✓ Registered Broadband user – no User ID needed".
 - "New user? Register with …" and "Already registered? Login with mobile number" switch between the two forms.
 - Registrations are kept separately per service. A number registered for Broadband still needs a VSC number the first time it's used for Cable TV.
