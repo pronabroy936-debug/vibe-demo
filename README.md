@@ -23,6 +23,8 @@ Double-click `index.html` (or open it in Chrome / an Android browser). No server
 
 To update the live demo, upload the changed files again (same steps 1–2 on the existing repo). The site refreshes within a minute or two.
 
+`index.html` loads `css/style.css` and `js/app.js` with a fresh `?v=` on every visit, so phones always get the latest version instead of an old cached copy. GitHub may cache `index.html` itself for about 10 minutes. To see an update immediately, open the link with a new ending, such as `https://<your-username>.github.io/vibe-demo/?v=2`.
+
 ## Demo flow (matches the reference video)
 
 ```
