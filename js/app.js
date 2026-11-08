@@ -116,12 +116,18 @@
       doneRegMsg: "Your broadband connection is registered. Next time, just log in with your mobile number.",
     },
     lco: {
-      sub: "Partner login for Local Cable Operators",
+      // LCO partners register ONCE with LCO code + mobile; after that they log in with mobile only
+      sub: "Registered partner? Login with your mobile number",
+      subReg: "New LCO partner? Register once with your LCO code & mobile number",
       label: "Partner / LCO Login",
       btn: "Login",
+      btnReg: "Register",
       extra: "lco",
-      done: "Welcome, Partner",
-      doneMsg: "LCO partner login was simulated successfully.",
+      extraOnlyOnRegister: true,
+      done: "Welcome back, Partner",
+      doneMsg: "You are logged in with your registered mobile number.",
+      doneReg: "Partner registration successful",
+      doneRegMsg: "Your LCO account is registered. Next time, just log in with your mobile number.",
     },
     guest: {
       // Guests register and log in with the mobile number only (no VSC / User ID)
@@ -859,7 +865,7 @@
       $('[data-act="reset-reg"]', root).addEventListener("click", (e) => {
         Registry.clear();
         $(".chev", e.currentTarget).textContent = "0 saved";
-        toast("Demo registrations cleared – Cable, Broadband & Guest users must register again", "success", 3000);
+        toast("Demo registrations cleared – Cable, Broadband, LCO & Guest users must register again", "success", 3000);
       });
       $('[data-act="logout"]', root).addEventListener("click", async () => {
         showLoader("Signing out…");
