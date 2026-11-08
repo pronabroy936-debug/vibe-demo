@@ -374,14 +374,37 @@
     return `<div class="banner" aria-hidden="true">${rows.join("")}</div>`;
   }
 
+  /* Ambient layer for the welcome/login screens: drifting neon glows + twinkling sparkles */
+  function ambientHTML() {
+    let seed = 11;
+    const r = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    let stars = "";
+    for (let i = 0; i < 16; i++) {
+      const size = 6 + Math.round(r() * 8);
+      stars += `<b style="left:${(r() * 94).toFixed(1)}%;top:${(18 + r() * 78).toFixed(1)}%;width:${size}px;height:${size}px;animation-delay:${(r() * 4).toFixed(2)}s;animation-duration:${(2.6 + r() * 2.4).toFixed(2)}s"></b>`;
+    }
+    return `<div class="ambient" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>${stars}</div>`;
+  }
+
+  /* Neon heartbeat + wave line, echoing the line through the VIBE logo */
+  const PULSE = `
+    <svg class="pulse-line" viewBox="0 0 320 28" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#ff3fd0"/><stop offset=".5" stop-color="#9b5cff"/><stop offset="1" stop-color="#2fd8ff"/></linearGradient></defs>
+      <path class="pl-base" d="M0 14 H70 l6 -9 l6 18 l6 -22 l6 22 l5 -9 H128 C150 14 160 4 182 4 S214 24 236 24 S270 6 292 10 S310 14 320 14"/>
+      <path class="pl-run" d="M0 14 H70 l6 -9 l6 18 l6 -22 l6 22 l5 -9 H128 C150 14 160 4 182 4 S214 24 236 24 S270 6 292 10 S310 14 320 14"/>
+    </svg>`;
+  const ARROW = `<span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>`;
+
   function heroHTML(withBack) {
     return `
+      ${ambientHTML()}
       <div class="hero">
         ${bannerHTML()}
         ${withBack ? `<button class="back-btn" data-act="back" aria-label="Back">${I.back}</button>` : ""}
         <img class="logo" src="${LOGO}" alt="VIBE – All-in-one hub" />
       </div>
-      <h1 class="headline">Entertainment,<em>your way.</em></h1>`;
+      <h1 class="headline">Entertainment,<em>your way.</em></h1>
+      ${PULSE}`;
   }
 
   function choiceHTML(key, selected) {
@@ -452,7 +475,7 @@
               <input id="mobile" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="Enter Mobile No" aria-label="Mobile number" />
             </label>
             <p class="hint" id="hint">10-digit mobile number</p>
-            <button class="btn dim" id="submit"><span class="lbl"></span></button>
+            <button class="btn dim" id="submit"><span class="lbl"></span>${ARROW}</button>
             ${once ? `<button class="link mode-switch" id="modeSwitch"></button>` : ""}
           </div>
         </section>`);
@@ -606,9 +629,19 @@
               ${choiceHTML("customer", state.role === "customer")}
               ${choiceHTML("lco", state.role === "lco")}
             </div>
-            <button class="btn" id="cont"><span class="lbl">Continue</span></button>
+            <button class="btn" id="cont"><span class="lbl">Continue</span>${ARROW}</button>
+            <div class="features">
+              <div class="feat-row">
+                <span class="feat">${I.tv}<b>Live TV</b></span>
+                <span class="feat">${I.monitor}<b>OTT Apps</b></span>
+                <span class="feat">${I.wifi}<b>Broadband</b></span>
+              </div>
+              <p class="feat-cap">Everything you watch — all in one hub</p>
+              <p class="terms">By continuing you agree to VIBE's <button class="tlink" data-toast="Terms of Service (demo)">Terms</button> &amp; <button class="tlink" data-toast="Privacy Policy (demo)">Privacy Policy</button></p>
+            </div>
           </div>
         </section>`);
+      $$("[data-toast]", root).forEach((b) => b.addEventListener("click", () => toast(b.dataset.toast)));
       bindCommon(root);
       bindChoices(root, (k) => (state.role = k));
       $("#cont", root).addEventListener("click", () => {
@@ -631,7 +664,7 @@
               ${choiceHTML("cable", state.service === "cable")}
               ${choiceHTML("guest", state.service === "guest")}
             </div>
-            <button class="btn" id="cont"><span class="lbl">Login</span></button>
+            <button class="btn" id="cont"><span class="lbl">Login</span>${ARROW}</button>
             <button class="link signup" id="signup">Sign up?</button>
           </div>
         </section>`);
