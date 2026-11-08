@@ -238,8 +238,8 @@
 
   /* ---------- App state ---------- */
   const state = {
-    role: "customer",       // customer | lco   (selection step 1)
-    service: "cable",       // broadband | cable | guest (selection step 2)
+    role: "customer",       // customer | lco | guest   (first page)
+    service: "cable",       // broadband | cable   (customer step 2)
     session: null,          // { type, mobile, vsc | bbid | lco }
     filter: { genre: null, lang: null, q: "" },
   };
@@ -628,6 +628,7 @@
             <div class="choices" role="radiogroup" aria-label="User type">
               ${choiceHTML("customer", state.role === "customer")}
               ${choiceHTML("lco", state.role === "lco")}
+              ${choiceHTML("guest", state.role === "guest")}
             </div>
             <button class="btn" id="cont"><span class="lbl">Continue</span>${ARROW}</button>
             <div class="features">
@@ -646,6 +647,7 @@
       bindChoices(root, (k) => (state.role = k));
       $("#cont", root).addEventListener("click", () => {
         if (state.role === "lco") go("login", { type: "lco" });
+        else if (state.role === "guest") go("login", { type: "guest" });
         else go("service");
       });
       return root;
@@ -662,7 +664,6 @@
             <div class="choices" role="radiogroup" aria-label="Connection type">
               ${choiceHTML("broadband", state.service === "broadband")}
               ${choiceHTML("cable", state.service === "cable")}
-              ${choiceHTML("guest", state.service === "guest")}
             </div>
             <button class="btn" id="cont"><span class="lbl">Login</span>${ARROW}</button>
             <button class="link signup" id="signup">Sign up?</button>
