@@ -28,17 +28,17 @@ To update the live demo, upload the changed files again (same steps 1–2 on the
 ## Demo flow (matches the reference video)
 
 ```
-App opens on ► Choose an option: Customer | LCO ──► Continue
+App opens on ► Choose an option: Customer | LCO | Guest ──► Continue
    ├─ LCO ──────────► Partner/LCO login (LCO code + mobile) ─► Success ─► Home
-   └─ Customer ─────► Log in / Register: Broadband | Cable TV | Guest ──► Login
+   ├─ Guest ────────► Join as Guest (mobile only: Register first time, Login after) ─► Home
+   │                    (playing a channel asks the guest to subscribe or preview)
+   └─ Customer ─────► Log in / Register: Broadband | Cable TV ──► Login
                          ├─ Broadband ─► Join as Broadband User
                          │                 ├─ Registered number ─► Login with mobile only ─► Home
                          │                 └─ New number ───────► User ID field appears ─► Register (User ID + mobile, once) ─► Home
                          ├─ Cable TV ──► Join as Cable User
                          │                 ├─ Registered number ─► Login with mobile only ─► Home
                          │                 └─ New number ───────► VSC field appears ─► Register (VSC + mobile, once) ─► Home
-                         ├─ Guest ─────► Join as Guest (mobile only: Register first time, Login after) ─► Home
-                         │                 (playing a channel asks the guest to subscribe or preview)
                          └─ "Sign up?" ► Registration form
 ```
 
